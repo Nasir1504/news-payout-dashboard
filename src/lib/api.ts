@@ -17,11 +17,10 @@ interface NewsApiResponse {
 const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY;
 const url = process.env.NEXT_PUBLIC_NEWS_API_URL;
 
-// Debug environment variables
-console.log('API Configuration:');
-console.log('API URL:', url);
-console.log('API Key exists:', !!apiKey);
-console.log('API Key length:', apiKey?.length || 0);
+// console.log('API Configuration:');
+// console.log('API URL:', url);
+// console.log('API Key exists:', !!apiKey);
+// console.log('API Key length:', apiKey?.length || 0);
 
 export const fetchNewsArticles = async (): Promise<Article[]> => {
   try {
@@ -31,13 +30,14 @@ export const fetchNewsArticles = async (): Promise<Article[]> => {
       method: 'GET',
       headers: {
         'x-api-key': apiKey || '',
+        'Accept': 'application/json',
       },
+    
     });
 
     if (!response.ok) {
       console.error('API Error Response:', {
         status: response.status,
-        statusText: response.statusText
       });
       throw new Error(`API responded with status ${response.status}`);
     }
