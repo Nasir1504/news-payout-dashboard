@@ -24,20 +24,12 @@ const url = process.env.NEXT_PUBLIC_NEWS_API_URL;
 
 export const fetchNewsArticles = async (): Promise<Article[]> => {
   try {
-    const apiUrl = `${url}/everything?q=technology&language=en&sortBy=publishedAt&pageSize=20`;
-
-    const response = await fetch(apiUrl, {
-      method: 'GET',
-      headers: {
-        'x-api-key': apiKey || '',
-        'Accept': 'application/json',
-      },
-    
-    });
+    const response = await fetch('/api/news');
 
     if (!response.ok) {
       console.error('API Error Response:', {
         status: response.status,
+        statusText: response.statusText
       });
       throw new Error(`API responded with status ${response.status}`);
     }
