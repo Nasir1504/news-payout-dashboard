@@ -14,14 +14,6 @@ interface NewsApiResponse {
   articles: RawArticle[];
 }
 
-const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY;
-const url = process.env.NEXT_PUBLIC_NEWS_API_URL;
-
-// console.log('API Configuration:');
-// console.log('API URL:', url);
-// console.log('API Key exists:', !!apiKey);
-// console.log('API Key length:', apiKey?.length || 0);
-
 export const fetchNewsArticles = async (): Promise<Article[]> => {
   try {
     const response = await fetch('/api/news');
