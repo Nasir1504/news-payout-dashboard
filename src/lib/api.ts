@@ -25,11 +25,14 @@ console.log('API Key length:', apiKey?.length || 0);
 
 export const fetchNewsArticles = async (): Promise<Article[]> => {
   try {
-    // Debug the full API URL (without exposing the key)
-    const apiUrl = `${url}/everything?q=technology&language=en&sortBy=publishedAt&pageSize=20&apiKey=${apiKey}`;
-    console.log('Attempting to fetch from:', apiUrl.replace(apiKey || '', '[API_KEY]'));
+    const apiUrl = `${url}/everything?q=technology&language=en&sortBy=publishedAt&pageSize=20`;
 
-    const response = await fetch(apiUrl);
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+      headers: {
+        'x-api-key': apiKey || '',
+      },
+    });
 
     if (!response.ok) {
       console.error('API Error Response:', {
